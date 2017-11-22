@@ -8,9 +8,9 @@ python 2.7, selenium, urllib
 
 ### Installing
 
-First install python 2.7 ( python 3.x wont work for now )
-Get Selenium from this [LINK](http://selenium-python.readthedocs.io/installation.html)
-urllib is installed in most of the PC
+First install python 2.7 ( python 3.x wont work for now )  
+Get Selenium from this [LINK](http://selenium-python.readthedocs.io/installation.html)  
+urllib is installed in most of the PC  
 
 Then,
 
