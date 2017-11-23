@@ -8,6 +8,7 @@ import json
 import time, os
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from sys import platform as _platform
 
 MAX_SUBS = 10
 MAX_CF_CONTEST_ID = 900
@@ -23,7 +24,18 @@ replacer = {'&quot;': '\"', '&gt;': '>', '&lt;': '<', '&amp;': '&', "&apos;": "'
 keys = replacer.keys()
 
 waitTime = 4
-path = "/Users/dipta007/Desktop/Project V/chromedriver"
+path = os.getcwd() + "/chromedriver"
+
+if _platform == "linux" or _platform == "linux2":
+   # linux
+   path += "_linux"
+elif _platform == "darwin":
+   # MAC OS X
+   path += "_mac"
+elif _platform == "win32" or _platform == "win64":
+   # Windows
+   path += "_win"
+
 driver = webdriver.Chrome(path)
 
 def get_ext(comp_lang):
