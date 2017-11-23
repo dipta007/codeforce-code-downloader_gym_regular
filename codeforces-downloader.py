@@ -24,20 +24,6 @@ replacer = {'&quot;': '\"', '&gt;': '>', '&lt;': '<', '&amp;': '&', "&apos;": "'
 keys = replacer.keys()
 
 waitTime = 0
-path = os.getcwd() + "/chromedriver"
-
-if _platform == "linux" or _platform == "linux2":
-   # linux
-   path += "_linux"
-elif _platform == "darwin":
-   # MAC OS X
-   path += "_mac"
-elif _platform == "win32" or _platform == "win64":
-   # Windows
-   path += "_win"
-
-driver = webdriver.Chrome(path)
-
 
 gym = {
     
@@ -46,6 +32,22 @@ gym = {
 regular = {
     
 }
+
+def GetPathOfChromeDriver():
+    path = os.getcwd() + "/chromedriver"
+    if _platform == "linux" or _platform == "linux2":
+       # linux
+       path += "_linux"
+    elif _platform == "darwin":
+       # MAC OS X
+       path += "_mac"
+    elif _platform == "win32" or _platform == "win64":
+       # Windows
+       path += "_win"
+    return path
+
+driver = webdriver.Chrome( GetPathOfChromeDriver() )
+
 
 def GetContestName():
     site = "http://codeforces.com/api/contest.list?gym=true"
@@ -73,7 +75,6 @@ def GetContestName():
         contestID = contest['id']
         contestName = contest['name']
         regular[contestID] = contestName
-
 
 def get_ext(comp_lang):
     if 'C++' in comp_lang:
