@@ -11,7 +11,9 @@ python 2.7, selenium, urllib
 First install python 2.7 ( python 3.x wont work for now )
 urllib is already installed in most of the PC  
 
-Then install selenium by executing this command in termilan
+Install [pip](https://pip.pypa.io/en/stable/installing/)
+
+Then install selenium by executing this command in terminal
 
 ```
 sudo pip install selenium
@@ -25,10 +27,10 @@ Just run "codeforces-downloader.py" file on your terminal
 Give your username and password
 ```
 
-And
+And,
 
 ```
-Go for a meal or workout
+Go for a coffee or workout
 Coming home you will see all your accepted codes in a arranged way :) 
 ```
 ## Built With
