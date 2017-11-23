@@ -9,6 +9,7 @@ import time, os
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from sys import platform as _platform
+import getpass
 
 MAX_SUBS = 1000000
 MAX_CF_CONTEST_ID = 900
@@ -23,7 +24,7 @@ EXT_keys = EXT.keys()
 replacer = {'&quot;': '\"', '&gt;': '>', '&lt;': '<', '&amp;': '&', "&apos;": "'"}
 keys = replacer.keys()
 
-waitTime = 0
+waitTime = 4
 
 gym = {
     
@@ -106,7 +107,7 @@ def main():
     handle = raw_input("Enter your handle: ")
     print ("Next step is password. ;) ")
     print ( "If you are afraid then check the code, You are smart enough to understand it")
-    passwd = raw_input("Enter your password: ")
+    passwd = getpass.getpass("Enter your password: ")
 
     CFLogIn(handle, passwd)
     GetContestName()
