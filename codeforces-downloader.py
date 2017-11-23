@@ -10,7 +10,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from sys import platform as _platform
 
-MAX_SUBS = 10
+MAX_SUBS = 1000000
 MAX_CF_CONTEST_ID = 900
 
 SUBMISSION_URL = 'http://codeforces.com/contest/{ContestId}/submission/{SubmissionId}'
@@ -23,7 +23,7 @@ EXT_keys = EXT.keys()
 replacer = {'&quot;': '\"', '&gt;': '>', '&lt;': '<', '&amp;': '&', "&apos;": "'"}
 keys = replacer.keys()
 
-waitTime = 4
+waitTime = 0
 path = os.getcwd() + "/chromedriver"
 
 if _platform == "linux" or _platform == "linux2":
@@ -37,6 +37,43 @@ elif _platform == "win32" or _platform == "win64":
    path += "_win"
 
 driver = webdriver.Chrome(path)
+
+
+gym = {
+    
+}
+
+regular = {
+    
+}
+
+def GetContestName():
+    site = "http://codeforces.com/api/contest.list?gym=true"
+    contestInfo = urllib.urlopen(site).read()
+    dic = json.loads(contestInfo)
+    if dic["status"] != "OK":
+        print "Oops.. Something went wrong...."
+        exit(0)
+
+    contests = dic['result']
+    for contest in contests:
+        contestID = contest['id']
+        contestName = contest['name']
+        gym[contestID] = contestName
+
+    site = "http://codeforces.com/api/contest.list?gym=false"
+    contestInfo = urllib.urlopen(site).read()
+    dic = json.loads(contestInfo)
+    if dic["status"] != "OK":
+        print "Oops.. Something went wrong...."
+        exit(0)
+
+    contests = dic['result']
+    for contest in contests:
+        contestID = contest['id']
+        contestName = contest['name']
+        regular[contestID] = contestName
+
 
 def get_ext(comp_lang):
     if 'C++' in comp_lang:
@@ -64,8 +101,6 @@ def CFLogIn(user, passwd):
     driver.find_element_by_class_name("submit").click()
     time.sleep(waitTime)
 
-handle = ""
-
 def main():
     handle = raw_input("Enter your handle: ")
     print ("Next step is password. ;) ")
@@ -73,12 +108,14 @@ def main():
     passwd = raw_input("Enter your password: ")
 
     CFLogIn(handle, passwd)
+    GetContestName()
 
     if not os.path.exists(handle):
         os.makedirs(handle)
 
     user_info = urllib.urlopen(USER_INFO_URL.format(handle=handle, count=MAX_SUBS)).read()
     dic = json.loads(user_info)
+
     if dic['status'] != u'OK':
         print ('Oops.. Something went wrong...')
         exit(0)
@@ -87,7 +124,7 @@ def main():
     start_time = time.time()
 
     for submission in submissions:
-        if submission['verdict'] == u'OK' and submission['contestId'] < MAX_CF_CONTEST_ID:
+        if submission['verdict'] == 'OK' and submission['contestId'] < MAX_CF_CONTEST_ID:
             con_id, sub_id = submission['contestId'], submission['id'],
             prob_name, prob_id = submission['problem']['name'], submission['problem']['index']
             comp_lang = submission['programmingLanguage']
@@ -96,15 +133,17 @@ def main():
             submission_info = driver.find_element_by_xpath("//*[@id=\"pageContent\"]/div[3]/pre").text
             result = parse(submission_info).replace('\r', '')
             ext = get_ext(comp_lang)
+
+            con_name = regular[con_id]
             
-            new_directory = handle + '/' + str(con_id)
+            new_directory = handle + '/' + str(con_name) + " - " + str(con_id)
             if not os.path.exists(new_directory):
                 os.makedirs(new_directory)
-            file = open(new_directory + '/' + prob_id + '[ ' + prob_name + ' ]' + '.' + ext, 'w')
+            file = open(new_directory + '/' + str(con_id) + str(prob_id) + "-" + str(prob_name) + '.' + ext, 'w')
 
             file.write(result)
             file.close()
-            print("1", prob_name)
+            print("Regular - ", str(prob_name) )
             time.sleep(waitTime)
 
         elif submission['verdict'] == 'OK':
@@ -117,14 +156,16 @@ def main():
             result = parse(submission_info).replace('\r', '')
             ext = get_ext(comp_lang)
 
-            new_directory = handle + '/' + str(con_id)
+            con_name = gym[con_id]
+            
+            new_directory = handle + '/' + str(con_name) + " - " + str(con_id)
             if not os.path.exists(new_directory):
                 os.makedirs(new_directory)
-            file = open(new_directory + '/' + prob_id + '[ ' + prob_name + ' ]' + '.' + ext, 'w')
+            file = open(new_directory + '/' + str(con_id) + str(prob_id) + "-" + str(prob_name) + '.' + ext, 'w')
 
             file.write(result)
             file.close()
-            print("2", prob_name)
+            print("Gym - ", str(prob_name) )
             time.sleep(waitTime)
 
     end_time = time.time()
@@ -134,4 +175,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
