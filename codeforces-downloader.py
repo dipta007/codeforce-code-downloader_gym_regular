@@ -145,7 +145,7 @@ def main():
 
             file.write(result)
             file.close()
-            print("Regular - ", str(prob_name) )
+            print "Regular - ", str(prob_name) 
             time.sleep(waitTime)
 
         elif submission['verdict'] == 'OK':
@@ -167,7 +167,7 @@ def main():
 
             file.write(result)
             file.close()
-            print("Gym - ", str(prob_name) )
+            print "Gym - ", str(prob_name) 
             time.sleep(waitTime)
 
     end_time = time.time()
