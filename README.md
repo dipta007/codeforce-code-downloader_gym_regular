@@ -8,14 +8,19 @@ python 2.7, selenium, urllib
 
 ### Installing
 
-First install python 2.7 ( python 3.x wont work for now )  
-Get Selenium from this [LINK](http://selenium-python.readthedocs.io/installation.html)  
-urllib is installed in most of the PC  
+First install python 2.7 ( python 3.x wont work for now )
+urllib is already installed in most of the PC  
+
+Then install selenium by executing this command in termilan
+
+```
+sudo pip install selenium
+```
 
 Then,
 
 ```
-Move the python file to the folder, where you want to save all your codes
+Move all the files to the folder, where you want to save all your codes
 Just run the python file on your terminal
 Give your username and password
 ```
