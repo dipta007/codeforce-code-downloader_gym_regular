@@ -21,7 +21,7 @@ Then,
 
 ```
 Move all the files to the folder, where you want to save all your codes
-Just run the python file on your terminal
+Just run "codeforces-downloader.py" file on your terminal
 Give your username and password
 ```
 
