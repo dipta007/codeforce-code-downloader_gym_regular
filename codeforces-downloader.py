@@ -119,6 +119,11 @@ def FileNameParse(file):
             ret += ch
     return ret
 
+def CheckPathSizeLimit(path):
+    if len(path) >= 255:
+        path = path[:250]
+    return path
+
 def main():
     handle = raw_input("Enter your handle: ")
     print ("Next step is password. ;) ")
@@ -154,10 +159,12 @@ def main():
 
             con_name = regular[con_id]
             
-            new_directory = handle + '/' + FileNameParse(con_name + " - " + str(con_id))
+            new_directory = CheckPathSizeLimit(handle + '/' + FileNameParse(con_name + " - " + str(con_id)))
             if not os.path.exists(new_directory):
                 os.makedirs(new_directory)
-            file = open(new_directory + '/' + FileNameParse(str(con_id) + str(prob_id) + "-" + prob_name + '.' + ext), 'w')
+
+            path = CheckPathSizeLimit(new_directory + '/' + FileNameParse(str(con_id) + str(prob_id) + "-" + prob_name + '.' + ext))
+            file = open(path, 'w')
 
             file.write(result.encode('UTF-8'))
             file.close()
@@ -173,13 +180,14 @@ def main():
             submission_info = driver.find_element_by_xpath("//*[@id=\"pageContent\"]/div[3]/pre").text
             result = parse(submission_info).replace('\r', '')
             ext = get_ext(comp_lang)
-
             con_name = gym[con_id]
             
-            new_directory = handle + '/' + FileNameParse(con_name + " - " + str(con_id))
+            new_directory = CheckPathSizeLimit(handle + '/' + FileNameParse(con_name + " - " + str(con_id)))
             if not os.path.exists(new_directory):
                 os.makedirs(new_directory)
-            file = open(new_directory + '/' + FileNameParse(str(con_id) + str(prob_id) + "-" + prob_name + '.' + ext), 'w')
+
+            path = CheckPathSizeLimit(new_directory + '/' + FileNameParse(str(con_id) + str(prob_id) + "-" + prob_name + '.' + ext))
+            file = open(path, 'w')
 
             file.write(result.encode('UTF-8'))
             file.close()
