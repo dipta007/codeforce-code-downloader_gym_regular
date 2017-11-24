@@ -1,4 +1,4 @@
-# Codeforce Code Downloader [ Gym + Contest ]
+# Codeforces Code Downloader [ Gym + Contest ]
 
 By this code, you can download your all accepted solutions from codeforces overnight.
 
