@@ -154,14 +154,14 @@ def main():
 
             con_name = regular[con_id]
             
-            new_directory = handle + '/' + FileNameParse(str(con_name) + " - " + str(con_id))
+            new_directory = handle + '/' + FileNameParse(con_name + " - " + str(con_id))
             if not os.path.exists(new_directory):
                 os.makedirs(new_directory)
-            file = open(new_directory + '/' + FileNameParse(str(con_id) + str(prob_id) + "-" + str(prob_name) + '.' + ext), 'w')
+            file = open(new_directory + '/' + FileNameParse(str(con_id) + str(prob_id) + "-" + prob_name + '.' + ext), 'w')
 
-            file.write(result)
+            file.write(result.encode('UTF-8'))
             file.close()
-            print "Regular - ", str(prob_name) 
+            print "Regular - ", str(prob_name.encode('UTF-8')) 
             time.sleep(waitTime)
 
         elif submission['verdict'] == 'OK':
@@ -176,14 +176,14 @@ def main():
 
             con_name = gym[con_id]
             
-            new_directory = handle + '/' + FileNameParse(str(con_name) + " - " + str(con_id))
+            new_directory = handle + '/' + FileNameParse(con_name + " - " + str(con_id))
             if not os.path.exists(new_directory):
                 os.makedirs(new_directory)
-            file = open(new_directory + '/' + FileNameParse(str(con_id) + str(prob_id) + "-" + str(prob_name) + '.' + ext), 'w')
+            file = open(new_directory + '/' + FileNameParse(str(con_id) + str(prob_id) + "-" + prob_name + '.' + ext), 'w')
 
-            file.write(result)
+            file.write(result.encode('UTF-8'))
             file.close()
-            print "Gym - ", str(prob_name) 
+            print "Gym - ", str(prob_name.encode('UTF-8')) 
             time.sleep(waitTime)
 
     end_time = time.time()
