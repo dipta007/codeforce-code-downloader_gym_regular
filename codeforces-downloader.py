@@ -56,6 +56,7 @@ def GetContestName():
     dic = json.loads(contestInfo)
     if dic["status"] != "OK":
         print "Oops.. Something went wrong...."
+        driver.quit()
         exit(0)
 
     contests = dic['result']
@@ -69,6 +70,7 @@ def GetContestName():
     dic = json.loads(contestInfo)
     if dic["status"] != "OK":
         print "Oops.. Something went wrong...."
+        driver.quit()
         exit(0)
 
     contests = dic['result']
@@ -101,6 +103,12 @@ def CFLogIn(user, passwd):
     password.send_keys(passwd)
 
     driver.find_element_by_class_name("submit").click()
+    time.sleep(waitTime)
+    elem = driver.find_elements_by_css_selector("#enterForm > table > tbody > tr.subscription-row > td:nth-child(2) > div > span")
+    if len(elem) > 0:
+        print "Invalid Handle / Password"
+        driver.quit()
+        exit(0)
     time.sleep(waitTime)
 
 def FileNameParse(file):
