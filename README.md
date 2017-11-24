@@ -22,16 +22,17 @@ sudo pip install selenium
 Then,
 
 ```
-Move all the files to the folder, where you want to save all your codes
-Just run "codeforces-downloader.py" file on your terminal
-Give your username and password
+1. Download the whole folder
+2. Move all the files to the folder, where you want to save all your codes
+3. Just run "codeforces-downloader.py" file on your terminal
+4. Give your username and password
 ```
 
 And,
 
 ```
-Go for a coffee or workout
-Coming home you will see all your accepted codes in a arranged way :) 
+5. Go for a coffee or workout
+6. Coming home you will see all your accepted codes in a arranged way :) 
 ```
 ## Built With
 
