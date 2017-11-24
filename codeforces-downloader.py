@@ -103,6 +103,19 @@ def CFLogIn(user, passwd):
     driver.find_element_by_class_name("submit").click()
     time.sleep(waitTime)
 
+def FileNameParse(file):
+    ret = ""
+    for ch in file:
+        if ch >= 'A' and ch <= 'Z':
+            ret += ch;
+        elif ch >= 'a' and ch <= 'z':
+            ret += ch;
+        elif ch >= '0' and ch <= '9':
+            ret += ch;
+        elif ch == '_' or ch == '-' or ch == '.' or ch == ' ' or ch == '/':
+            ret += ch;
+    return ret
+
 def main():
     handle = raw_input("Enter your handle: ")
     print ("Next step is password. ;) ")
@@ -138,10 +151,10 @@ def main():
 
             con_name = regular[con_id]
             
-            new_directory = handle + '/' + str(con_name) + " - " + str(con_id)
+            new_directory = FileNameParse(handle + '/' + str(con_name) + " - " + str(con_id))
             if not os.path.exists(new_directory):
                 os.makedirs(new_directory)
-            file = open(new_directory + '/' + str(con_id) + str(prob_id) + "-" + str(prob_name) + '.' + ext, 'w')
+            file = open(FileNameParse(new_directory + '/' + str(con_id) + str(prob_id) + "-" + str(prob_name) + '.' + ext), 'w')
 
             file.write(result)
             file.close()
@@ -160,10 +173,10 @@ def main():
 
             con_name = gym[con_id]
             
-            new_directory = handle + '/' + str(con_name) + " - " + str(con_id)
+            new_directory = FileNameParse(handle + '/' + str(con_name) + " - " + str(con_id))
             if not os.path.exists(new_directory):
                 os.makedirs(new_directory)
-            file = open(new_directory + '/' + str(con_id) + str(prob_id) + "-" + str(prob_name) + '.' + ext, 'w')
+            file = open(FileNameParse(new_directory + '/' + str(con_id) + str(prob_id) + "-" + str(prob_name) + '.' + ext), 'w')
 
             file.write(result)
             file.close()
