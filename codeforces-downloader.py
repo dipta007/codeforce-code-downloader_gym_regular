@@ -163,7 +163,7 @@ def main():
             if not os.path.exists(new_directory):
                 os.makedirs(new_directory)
 
-            path = CheckPathSizeLimit(new_directory + '/' + FileNameParse(str(con_id) + str(prob_id) + "-" + prob_name + '.' + ext))
+            path = CheckPathSizeLimit(new_directory + '/' + FileNameParse(str(con_id) + str(prob_id) + "-" + prob_name) ) + '.' + ext;
             file = open(path, 'w')
 
             file.write(result.encode('UTF-8'))
@@ -186,7 +186,7 @@ def main():
             if not os.path.exists(new_directory):
                 os.makedirs(new_directory)
 
-            path = CheckPathSizeLimit(new_directory + '/' + FileNameParse(str(con_id) + str(prob_id) + "-" + prob_name + '.' + ext))
+            path = CheckPathSizeLimit(new_directory + '/' + FileNameParse(str(con_id) + str(prob_id) + "-" + prob_name))  + '.' + ext
             file = open(path, 'w')
 
             file.write(result.encode('UTF-8'))
