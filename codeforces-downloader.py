@@ -119,11 +119,6 @@ def FileNameParse(file):
             ret += ch
     return ret
 
-def CheckPathSizeLimit(path):
-    if len(path) >= 255:
-        path = path[:250]
-    return path
-
 def main():
     handle = raw_input("Enter your handle: ")
     print ("Next step is password. ;) ")
@@ -159,11 +154,17 @@ def main():
 
             con_name = regular[con_id]
             
-            new_directory = CheckPathSizeLimit(handle + '/' + FileNameParse(con_name + " - " + str(con_id)))
+            new_directory = handle + '/' + FileNameParse(con_name + " - " + str(con_id))
+            path = new_directory + '/' + FileNameParse(str(con_id) + str(prob_id) + "-" + prob_name) + '.' + ext;
+
+            if(len(new_directory) > 100):
+            	new_directory = handle + '/' + FileNameParse(str(con_id))
+            	path = new_directory + '/' + FileNameParse(str(con_id) + str(prob_id) + "-" + prob_name) + '.' + ext 
+
             if not os.path.exists(new_directory):
                 os.makedirs(new_directory)
 
-            path = CheckPathSizeLimit(new_directory + '/' + FileNameParse(str(con_id) + str(prob_id) + "-" + prob_name) ) + '.' + ext;
+            
             file = open(path, 'w')
 
             file.write(result.encode('UTF-8'))
@@ -182,11 +183,17 @@ def main():
             ext = get_ext(comp_lang)
             con_name = gym[con_id]
             
-            new_directory = CheckPathSizeLimit(handle + '/' + FileNameParse(con_name + " - " + str(con_id)))
+            new_directory = handle + '/' + FileNameParse(con_name + " - " + str(con_id))
+            path = new_directory + '/' + FileNameParse(str(con_id) + str(prob_id) + "-" + prob_name)  + '.' + ext
+
+            if(len(new_directory) > 100):
+            	new_directory = handle + '/' + FileNameParse(str(con_id))
+            	path = new_directory + '/' + FileNameParse(str(con_id) + str(prob_id) + "-" + prob_name) + '.' + ext 
+
             if not os.path.exists(new_directory):
                 os.makedirs(new_directory)
 
-            path = CheckPathSizeLimit(new_directory + '/' + FileNameParse(str(con_id) + str(prob_id) + "-" + prob_name))  + '.' + ext
+            
             file = open(path, 'w')
 
             file.write(result.encode('UTF-8'))
