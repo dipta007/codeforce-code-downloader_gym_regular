@@ -190,8 +190,9 @@ def main():
 
 			file.write(result.encode('UTF-8'))
 			file.close()
-			print "Regular - ", str(prob_name.encode('UTF-8'))
 			downloaded.append(str(con_id) + str(prob_id))
+			completed = float( len(downloaded) * 100 ) / float( len(submissions) ) 
+			print "Regular - ", str(prob_name.encode('UTF-8')), "Completed: " + str(completed) + "%"
 			SetDownloadedFile(handle, str(con_id) + str(prob_id))
 			time.sleep(waitTime)
 
@@ -225,14 +226,16 @@ def main():
 
 			file.write(result.encode('UTF-8'))
 			file.close()
-			print "Gym - ", str(prob_name.encode('UTF-8'))
 			downloaded.append(str(con_id) + str(prob_id))
+			completed = float( len(downloaded) * 100 ) / float( len(submissions) ) 
+			print "Regular - ", str(prob_name.encode('UTF-8')), "Completed: " + str(completed) + "%"
 			SetDownloadedFile(handle, str(con_id) + str(prob_id))
 			time.sleep(waitTime)
 
 	end_time = time.time()
 	driver.quit()
 
+	print "Successfully Completed 100%"
 	print ('Execution time %d seconds' % int(end_time - start_time) )
 
 if __name__ == "__main__":
