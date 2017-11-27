@@ -102,6 +102,7 @@ def CFLogIn(user, passwd):
 	password.send_keys(passwd)
 
 	driver.find_element_by_class_name("submit").click()
+	time.sleep(waitTime)
 
 	elem = driver.find_elements_by_css_selector("#enterForm > table > tbody > tr.subscription-row > td:nth-child(2) > div > span")
 	if len(elem) > 0:
@@ -128,11 +129,11 @@ def GetDownloadedFile(handle):
 	print "Existing: ", downloaded
 	return downloaded
 
-def SetDownloadedFile(handle, downloaded):
+def SetDownloadedFile(handle, st):
 	path = handle + '/' + 'downloaded'
-	file = open(str(path), 'w')
-	print "New: ", downloaded
-	file.write( "\n".join(downloaded))
+	file = open(str(path), 'a')
+	file.write( st + "\n" )
+	file.close()
 
 def main():
 	handle = raw_input("Enter your handle: ")
@@ -191,6 +192,7 @@ def main():
 			file.close()
 			print "Regular - ", str(prob_name.encode('UTF-8'))
 			downloaded.append(str(con_id) + str(prob_id))
+			SetDownloadedFile(handle, str(con_id) + str(prob_id))
 			time.sleep(waitTime)
 
 		elif submission['verdict'] == 'OK':
@@ -225,11 +227,11 @@ def main():
 			file.close()
 			print "Gym - ", str(prob_name.encode('UTF-8'))
 			downloaded.append(str(con_id) + str(prob_id))
+			SetDownloadedFile(handle, str(con_id) + str(prob_id))
 			time.sleep(waitTime)
 
 	end_time = time.time()
 	driver.quit()
-	SetDownloadedFile(handle, downloaded)
 
 	print ('Execution time %d seconds' % int(end_time - start_time) )
 
