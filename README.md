@@ -24,8 +24,9 @@ Then,
 ```
 1. Download the whole folder
 2. Move all the files to the folder, where you want to save all your codes
-3. Just run "codeforces-downloader.py" file on your terminal
-4. Give your username and password
+3. If you have submitted any code in coach mode, please make it ON before running this script.
+4. Just run "codeforces-downloader.py" file on your terminal
+5. Give your username and password
 ```
 
 And,
