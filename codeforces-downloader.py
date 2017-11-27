@@ -158,7 +158,12 @@ def main():
 		exit(0)
 
 	submissions = dic['result']
+	alreadyDone = 0
 	for submission in submissions:
+		alreadyDone+=1
+		completed = float( alreadyDone * 100 ) / float( len(submissions) ) 
+		print "Completed: " + str(completed) + "%"
+
 		if submission['verdict'] == 'OK' and submission['contestId'] < MAX_CF_CONTEST_ID:
 			con_id, sub_id = submission['contestId'], submission['id'],
 			prob_name, prob_id = submission['problem']['name'], submission['problem']['index']
@@ -191,8 +196,8 @@ def main():
 			file.write(result.encode('UTF-8'))
 			file.close()
 			downloaded.append(str(con_id) + str(prob_id))
-			completed = float( len(downloaded) * 100 ) / float( len(submissions) ) 
-			print "Regular - ", str(prob_name.encode('UTF-8')), "Completed: " + str(completed) + "%"
+			
+			print "                                  Regular - ", str(prob_name.encode('UTF-8'))
 			SetDownloadedFile(handle, str(con_id) + str(prob_id))
 			time.sleep(waitTime)
 
@@ -227,15 +232,15 @@ def main():
 			file.write(result.encode('UTF-8'))
 			file.close()
 			downloaded.append(str(con_id) + str(prob_id))
-			completed = float( len(downloaded) * 100 ) / float( len(submissions) ) 
-			print "Regular - ", str(prob_name.encode('UTF-8')), "Completed: " + str(completed) + "%"
+			 
+			print "                                  Regular - ", str(prob_name.encode('UTF-8'))
 			SetDownloadedFile(handle, str(con_id) + str(prob_id))
 			time.sleep(waitTime)
 
 	end_time = time.time()
 	driver.quit()
 
-	print "Successfully Completed 100%"
+	print "\n\nSuccessfully Completed 100%"
 	print ('Execution time %d seconds' % int(end_time - start_time) )
 
 if __name__ == "__main__":
