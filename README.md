@@ -35,6 +35,12 @@ And,
 5. Go for a coffee or workout
 6. Coming home you will see all your accepted codes in a arranged way :) 
 ```
+## Features:
+
+* Download all your accepted codes from codeforces including gym and coach mode
+* If the download interrupted for any cause, next time the download will be resumed.
+* All solutions will be arranged in a structured way 
+
 ## Built With
 
 * [Python](http://www.dropwizard.io/1.0.2/docs/) - The main platform
