@@ -12,7 +12,7 @@ from sys import platform as _platform
 import getpass
 
 MAX_SUBS = 1000000
-MAX_CF_CONTEST_ID = 900
+MAX_CF_CONTEST_ID = 4444
 
 SUBMISSION_URL = 'http://codeforces.com/contest/{ContestId}/submission/{SubmissionId}'
 SUBMISSION_URL_GYM = 'http://codeforces.com/gym/{ContestId}/submission/{SubmissionId}'
@@ -178,7 +178,7 @@ def main():
 			result = parse(submission_info).replace('\r', '')
 			ext = get_ext(comp_lang)
 
-			con_name = regular[con_id]
+			con_name = regular.get(con_id, "Unknown Contest")
 			
 			new_directory = os.path.join( handle, FileNameParse(con_name + " - " + str(con_id)) )
 			path = os.path.join( new_directory, FileNameParse(str(con_id) + str(prob_id) + "-" + prob_name) + '.' + ext )
@@ -215,17 +215,24 @@ def main():
 				continue
 
 			driver.get(SUBMISSION_URL_GYM.format(ContestId=con_id, SubmissionId=sub_id))
+
+			print(SUBMISSION_URL_GYM.format(ContestId=con_id, SubmissionId=sub_id))
+
 			submission_info = driver.find_element_by_xpath("//*[@id=\"pageContent\"]/div[3]/pre").text
 			result = parse(submission_info).replace('\r', '')
 			ext = get_ext(comp_lang)
-			con_name = gym[con_id]
+			con_name = gym.get(con_id, "Unknown Contest")
 			
-			new_directory = handle + '/' + FileNameParse(con_name + " - " + str(con_id))
-			path = new_directory + '/' + FileNameParse(str(con_id) + str(prob_id) + "-" + prob_name)  + '.' + ext
+			new_directory = os.path.join( handle, FileNameParse(con_name + " - " + str(con_id)) )
+			path = os.path.join( new_directory, FileNameParse(str(con_id) + str(prob_id) + "-" + prob_name) + '.' + ext )
+			# new_directory = handle + '/' + FileNameParse(con_name + " - " + str(con_id))
+			# path = new_directory + '/' + FileNameParse(str(con_id) + str(prob_id) + "-" + prob_name)  + '.' + ext
 
 			if(len(new_directory) > 100):
-				new_directory = handle + '/' + FileNameParse(str(con_id))
-				path = new_directory + '/' + FileNameParse(str(con_id) + str(prob_id) + "-" + prob_name) + '.' + ext 
+				new_directory = os.path.join( handle, FileNameParse(str(con_id)))
+				path = os.path.join( new_directory, FileNameParse(str(con_id) + str(prob_id) + "-" + prob_name) + '.' + ext)
+				# new_directory = handle + '/' + FileNameParse(str(con_id))
+				# path = new_directory + '/' + FileNameParse(str(con_id) + str(prob_id) + "-" + prob_name) + '.' + ext 
 
 			if not os.path.exists(new_directory):
 				os.makedirs(new_directory)
@@ -237,7 +244,7 @@ def main():
 			file.close()
 			downloaded.append(str(con_id) + str(prob_id))
 			 
-			print "                                  Regular - ", str(prob_name.encode('UTF-8'))
+			print "                                  GYM - ", str(prob_name.encode('UTF-8'))
 			SetDownloadedFile(handle, str(con_id) + str(prob_id))
 			time.sleep(waitTime)
 
