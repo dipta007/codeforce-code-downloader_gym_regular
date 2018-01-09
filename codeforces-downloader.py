@@ -35,7 +35,7 @@ regular = {
 }
 
 def GetPathOfChromeDriver():
-	path = os.getcwd() + "/chromedriver"
+	path = os.path.join( os.getcwd() , "chromedriver")
 	if _platform == "linux" or _platform == "linux2":
 	   # linux
 	   path += "_linux"
@@ -120,7 +120,7 @@ def FileNameParse(file):
 	return ret
 
 def GetDownloadedFile(handle):
-	path = handle + '/' + 'downloaded'
+	path = os.path.join( handle , 'downloaded')
 	if os.path.exists(path) == False:
 		return []
 	file = open(str(path), 'r')
@@ -130,7 +130,7 @@ def GetDownloadedFile(handle):
 	return downloaded
 
 def SetDownloadedFile(handle, st):
-	path = handle + '/' + 'downloaded'
+	path = os.path.join( handle , 'downloaded')
 	file = open(str(path), 'a')
 	file.write( st + "\n" )
 	file.close()
@@ -180,12 +180,16 @@ def main():
 
 			con_name = regular[con_id]
 			
-			new_directory = handle + '/' + FileNameParse(con_name + " - " + str(con_id))
-			path = new_directory + '/' + FileNameParse(str(con_id) + str(prob_id) + "-" + prob_name) + '.' + ext;
+			new_directory = os.path.join( handle, FileNameParse(con_name + " - " + str(con_id)) )
+			path = os.path.join( new_directory, FileNameParse(str(con_id) + str(prob_id) + "-" + prob_name) + '.' + ext )
+			# new_directory = handle + '/' + FileNameParse(con_name + " - " + str(con_id))
+			# path = new_directory + '/' + FileNameParse(str(con_id) + str(prob_id) + "-" + prob_name) + '.' + ext;
 
 			if(len(new_directory) > 100):
-				new_directory = handle + '/' + FileNameParse(str(con_id))
-				path = new_directory + '/' + FileNameParse(str(con_id) + str(prob_id) + "-" + prob_name) + '.' + ext 
+				new_directory = os.path.join( handle, FileNameParse(str(con_id)))
+				path = os.path.join( new_directory, FileNameParse(str(con_id) + str(prob_id) + "-" + prob_name) + '.' + ext)
+				# new_directory = handle + '/' + FileNameParse(str(con_id))
+				# path = new_directory + '/' + FileNameParse(str(con_id) + str(prob_id) + "-" + prob_name) + '.' + ext 
 
 			if not os.path.exists(new_directory):
 				os.makedirs(new_directory)
