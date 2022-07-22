@@ -39,6 +39,7 @@ regular = {
 print ( "\nIf you are afraid then check the code, You are smart enough to understand it")
 GH_TOKEN = getpass.getpass("Enter your GH_TOKEN: ")
 os.environ['GH_TOKEN'] = GH_TOKEN
+
 driver = webdriver.Chrome(ChromeDriverManager().install())
 
 def GetContestName():
